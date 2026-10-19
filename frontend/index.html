@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>registro do usuario</title>
+</head>
+<body>
+
+      <div id="div_cadastro">
+        <form id="form_cadastro">
+          <input type="text" name="name" id="name">
+          <input type="email" name="email" id="email">
+          <input type="password" name="password" id="password">
+        </form>
+        <button onclick="api_cadastro_usuario()">cadastrar</button>
+      </div>
+
+</body>
+<script>
+  async function api_cadastro_usuario() {
+    const dados_usuario = document.getElementById('form_cadastro');
+    const dados_objeto = Object.fromEntries (new FormData (dados_usuario));
+    const dados_json =  JSON.stringify (dados_objeto);
+    //console.log(dados_json);
+
+    const requisicao = await fetch('http://localhost:3001/auth/register',
+      {
+        method: 'POST',
+        headers:{
+          "content-type" : "application/json"
+        },
+        body: dados_json
+      }
+    )
+
+    if (!requisicao.ok){
+      throw new error('erro ao enviar requisição: $(requisição.status)');
+    }
+
+    const resposta = await requisicao.json();
+    console.log(resposta);
+
+  }
+</script>
+</html>
