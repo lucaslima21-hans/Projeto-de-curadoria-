@@ -33,13 +33,16 @@
       }
     )
 
+
     if (!requisicao.ok){
+      alert(resposta.message)
       throw new error('erro ao enviar requisição: $(requisição.status)');
     }
-
-    const resposta = await requisicao.json();
+const resposta = await requisicao.json();
     console.log(resposta);
 
+localStorage.setItem('accessToken', resposta.accessToken);
+console.log(resposta.accessToken); 
   }
 </script>
 </html>

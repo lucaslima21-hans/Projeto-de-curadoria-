@@ -27,6 +27,7 @@
         method: 'POST',
         headers:{
           "content-type" : "application/json"
+          //, "Authorization" : "Bearer <token>"
         },
         body: dados_json
       }
@@ -36,9 +37,13 @@
       throw new error('erro ao enviar requisição: $(requisição.status)');
     }
 
-    const resposta = await requisicao.json();
-    console.log(resposta);
 
-  }
+const resposta = await requisicao.json();
+localStorage.setItem('accessToken', resposta.accessToken);
+teste
+    console.log(resposta); 
+
+ }
+
 </script>
 </html>
